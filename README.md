@@ -1,2 +1,2 @@
-# org_arq_comp
-Disciplina: ORGANIZAÇÃO E ARQUITETURA DE COMPUTADORES
+# Seja Bem-vindo(a)!  
+- Disciplina: ORGANIZAÇÃO E ARQUITETURA DE COMPUTADORES
