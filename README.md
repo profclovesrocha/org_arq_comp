@@ -1,6 +1,7 @@
-# Seja Bem-vindo(a)!  
-- Disciplina: ORGANIZAÇÃO E ARQUITETURA DE COMPUTADORES.
+# Welcome!
 
-- Bem-vindo à disciplina que oferece uma visão abrangente dos fundamentos que sustentam o funcionamento dos computadores modernos — desde a organização interna do hardware, passando pela linguagem de máquina e pelo pipeline do processador, até os conceitos de sistemas operacionais, gerenciamento de memória, sistemas de arquivos e segurança. O objetivo é capacitar o estudante a compreender, avaliar e projetar sistemas computacionais com base sólida em teoria e prática.
+- Subject: COMPUTER ORGANIZATION AND ARCHITECTURE.
 
-- O método estruturado em Propósito, Projeto e Desafios é uma abordagem de gestão e aprendizagem ativa (frequentemente associada à Aprendizagem Baseada em Projetos - PBL ou Desafios - CBL) focada em dar sentido prático ao aprendizado ou trabalho, conectando a intenção à ação real.
+- Welcome to this subject that offers a comprehensive overview of the fundamentals that underpin the operation of modern computers — from the internal organization of hardware, through machine language and processor pipeline, to the concepts of operating systems, memory management, file systems, and security. The goal is to empower students to understand, evaluate, and design computer systems with a solid foundation in theory and practice.
+
+- The structured method of Purpose, Project, and Challenges is an approach to management and active learning (often associated with Project-Based Learning - PBL or Challenges - CBL) focused on giving practical meaning to learning or work, connecting intention to real action.
