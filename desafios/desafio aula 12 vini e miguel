@@ -1,0 +1,7 @@
+# Vinícius da Cunha Correia
+# Miguel Marcio Pessoa Lira
+saldo = float(input('digite o valor: '))
+a = saldo + 500
+b = saldo - 200
+print('resultado A : {}'.format(a))
+print('resultado B : {}'.format(b))
