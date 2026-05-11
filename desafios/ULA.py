@@ -1,5 +1,5 @@
-# Estudante: ?
-# Matrícula: ?
+# Estudante: lucas gabriel m de frança 
+# Matrícula: 01897361
 def ula(A, B, opcode):
     
     if opcode == 0:
