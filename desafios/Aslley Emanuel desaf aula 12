@@ -1,0 +1,37 @@
+import threading
+import time
+
+saldo = 1000
+
+def adicionar():
+    global saldo
+    
+    valor = saldo
+    time.sleep(1)
+    valor += 500
+    saldo = valor
+
+    print("Thread A adicionou R$500")
+    print("Saldo atual:", saldo)
+
+def subtrair():
+    global saldo
+    
+    valor = saldo
+    time.sleep(1)
+    valor -= 200
+    saldo = valor
+
+    print("Thread B subtraiu R$200")
+    print("Saldo atual:", saldo)
+
+thread1 = threading.Thread(target=adicionar)
+thread2 = threading.Thread(target=subtrair)
+
+thread1.start()
+thread2.start()
+
+thread1.join()
+thread2.join()
+
+print("Saldo final:", saldo)
