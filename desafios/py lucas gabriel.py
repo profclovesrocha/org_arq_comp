@@ -1,3 +1,5 @@
+#ALUNO: LUCAS GABRIEL MEDEIROS DE FRAÇA 
+#MATRICULA: 01897361
 import threading
 import time
 
