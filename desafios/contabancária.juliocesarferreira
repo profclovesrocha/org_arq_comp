@@ -1,0 +1,26 @@
+# UNINASSAU PAULISTA
+# DOCENTE: CLOVES ROCHA
+# ALUNO: JÚLIO CÉSAR FERREIRA DO NASCIMENTO
+# DISCIPLINA: LÓGICA DE PROGRAMAÇÃO
+
+# thread A
+
+nota1_str = input("nota1: ")
+nota2_str = input("nota2: ")
+
+nota1 = float(nota1_str)
+nota2 = float(nota2_str)
+
+resultado = (nota1 + nota2)
+print("seu resultado foi:", resultado)
+
+# thread B
+
+nota1_str = input("nota1: ")
+nota2_str = input("nota2: ")
+
+nota1 = float(nota1_str)
+nota2 = float(nota2_str)
+
+resultado = (nota1 - nota2)
+print("seu resultado foi:", resultado)
