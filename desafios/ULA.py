@@ -1,3 +1,5 @@
+# Estudante: ?
+# Matrícula: ?
 def ula(A, B, opcode):
     
     if opcode == 0:
