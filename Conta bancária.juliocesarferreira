@@ -1,0 +1,80 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyMlHbP5cIHe4mQtx3X1LtRZ",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/profclovesrocha/org_arq_comp/blob/main/Conta%20banc%C3%A1ria.juliocesarferreira\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "9mhl6BCo-TKg"
+      },
+      "outputs": [],
+      "source": [
+        "# UNINASSAU PAULISTA\n",
+        "# DOCENTE: CLOVES ROCHA\n",
+        "# ALUNO: JÚLIO CÉSAR FERREIRA DO NASCIMENTO\n",
+        "# DISCIPLINA: LÓGICA DE PROGRAMAÇÃO"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "nota1_str = input(\"nota1: \")\n",
+        "nota2_str = input(\"nota2: \")\n",
+        "\n",
+        "nota1 = float(nota1_str)\n",
+        "nota2 = float(nota2_str)\n",
+        "\n",
+        "resultado = (nota1 + nota2)\n",
+        "print(\"seu resultado foi:\", resultado)"
+      ],
+      "metadata": {
+        "id": "i8iGOUXqAfUC"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "nota1_str = input(\"nota1: \")\n",
+        "nota2_str = input(\"nota2: \")\n",
+        "\n",
+        "nota1 = float(nota1_str)\n",
+        "nota2 = float(nota2_str)\n",
+        "\n",
+        "resultado = (nota1 - nota2)\n",
+        "print(\"seu resultado foi:\", resultado)"
+      ],
+      "metadata": {
+        "id": "zKiWiu_5GBu5"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
