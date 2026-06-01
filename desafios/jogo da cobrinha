@@ -1,0 +1,112 @@
+import pygame
+import random
+
+# Inicialização
+pygame.init()
+
+# Configurações da tela
+LARGURA = 600
+ALTURA = 400
+TAMANHO = 20
+
+tela = pygame.display.set_mode((LARGURA, ALTURA))
+pygame.display.set_caption("Jogo da Cobrinha")
+
+# Cores
+PRETO = (0, 0, 0)
+VERDE = (0, 255, 0)
+VERMELHO = (255, 0, 0)
+BRANCO = (255, 255, 255)
+
+# Relógio
+clock = pygame.time.Clock()
+
+# Cobra
+cobra = [(100, 100)]
+direcao = (TAMANHO, 0)
+
+# Comida
+comida = (
+    random.randrange(0, LARGURA, TAMANHO),
+    random.randrange(0, ALTURA, TAMANHO)
+)
+
+pontuacao = 0
+
+rodando = True
+while rodando:
+    clock.tick(10)
+
+    for evento in pygame.event.get():
+        if evento.type == pygame.QUIT:
+            rodando = False
+
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_UP and direcao != (0, TAMANHO):
+                direcao = (0, -TAMANHO)
+            elif evento.key == pygame.K_DOWN and direcao != (0, -TAMANHO):
+                direcao = (0, TAMANHO)
+            elif evento.key == pygame.K_LEFT and direcao != (TAMANHO, 0):
+                direcao = (-TAMANHO, 0)
+            elif evento.key == pygame.K_RIGHT and direcao != (-TAMANHO, 0):
+                direcao = (TAMANHO, 0)
+
+    # Nova posição da cabeça
+    x, y = cobra[0]
+    novo_x = x + direcao[0]
+    novo_y = y + direcao[1]
+
+    nova_cabeca = (novo_x, novo_y)
+
+    # Colisão com paredes
+    if (
+        novo_x < 0 or novo_x >= LARGURA or
+        novo_y < 0 or novo_y >= ALTURA
+    ):
+        print(f"Game Over! Pontuação: {pontuacao}")
+        break
+
+    # Colisão com o próprio corpo
+    if nova_cabeca in cobra:
+        print(f"Game Over! Pontuação: {pontuacao}")
+        break
+
+    cobra.insert(0, nova_cabeca)
+
+    # Comer comida
+    if nova_cabeca == comida:
+        pontuacao += 1
+        comida = (
+            random.randrange(0, LARGURA, TAMANHO),
+            random.randrange(0, ALTURA, TAMANHO)
+        )
+    else:
+        cobra.pop()
+
+    # Desenho
+    tela.fill(PRETO)
+
+    pygame.draw.rect(
+        tela,
+        VERMELHO,
+        (comida[0], comida[1], TAMANHO, TAMANHO)
+    )
+
+    for parte in cobra:
+        pygame.draw.rect(
+            tela,
+            VERDE,
+            (parte[0], parte[1], TAMANHO, TAMANHO)
+        )
+
+    fonte = pygame.font.SysFont(None, 35)
+    texto = fonte.render(
+        f"Pontos: {pontuacao}",
+        True,
+        BRANCO
+    )
+    tela.blit(texto, (10, 10))
+
+    pygame.display.update()
+
+pygame.quit()
