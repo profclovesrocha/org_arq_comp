@@ -1,0 +1,297 @@
+# LINK: https://sites.google.com/view/aplicaoagricultordigital/in%C3%ADcio
+
+# ALUNOS : Aslley Emanuel Da Costa Mariano - 01878630
+Edson Rodrigues Cardoso Dos Santos - 01351404
+Fábio Luis Damasceno da Silva - 012212500
+João Paulo Romão Sampaio de Melo - 01871330
+Pedro Felipe Santiago Neto - 01891949
+Sandrielly Maria Farias da Silva Alves Bezerra - 01904552
+
+# CÓDIGO EM HTML : 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agricultor Digital Login</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #333; }
+        .main-container { width: 375px; max-width: 100%; background-color: #000; padding: 60px 25px 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        .header { text-align: center; margin-bottom: 50px; }
+        .logo-container { margin-bottom: 30px; }
+        .logo { width: 140px; height: auto; object-fit: contain; }
+        h1 { color: white; text-transform: uppercase; font-size: 26px; margin: 0; line-height: 1.2; letter-spacing: 1px; }
+        .login-section { width: 100%; text-align: center; margin-bottom: 50px; }
+        h2 { color: white; font-size: 22px; margin: 0 0 25px 0; font-weight: normal; }
+        form { display: flex; flex-direction: column; gap: 18px; }
+        .input-group { position: relative; background-color: white; border-radius: 30px; padding: 15px 25px; box-sizing: border-box; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .user-input input { padding-left: 35px; }
+        .search-icon { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: #f57c00; font-size: 20px; }
+        input { border: none; outline: none; width: 100%; font-size: 16px; color: #333; background: transparent; }
+        input::placeholder { color: #999; }
+        .forgot-password { color: white; text-decoration: underline; font-size: 14px; margin-top: 15px; margin-bottom: 30px; display: inline-block; cursor: pointer; }
+        .submit-btn { background-color: #f57c00; color: white; border: none; border-radius: 40px; padding: 18px; font-size: 20px; font-weight: bold; cursor: pointer; width: 100%; box-sizing: border-box; transition: background-color 0.3s; }
+        .submit-btn:hover { background-color: #e65100; }
+        .footer { text-align: center; width: 100%; padding-top: 20px; }
+        .footer p { color: white; font-size: 14px; margin: 0; cursor: pointer; }
+        .footer p:hover { text-decoration: underline; }
+        
+        .hidden { display: none !important; }
+        .msg-erro { color: #ff6b6b; font-size: 14px; margin-bottom: 15px; display: none; }
+        .msg-sucesso { color: #4CAF50; font-size: 14px; margin-bottom: 15px; display: none; }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="main-container">
+        <header class="header">
+            <div class="logo-container">
+                <img src="https://i.imgur.com/xpgEl3U.png" alt="Logo Agricultor Digital" class="logo">
+            </div>
+            <h1>AGRICULTOR DIGITAL</h1>
+        </header>
+
+        <!-- TELA DE LOGIN -->
+        <main class="login-section" id="tela-login">
+            <h2>Acesse Sua Conta</h2>
+            <div id="msg-login-erro" class="msg-erro">E-mail ou senha incorretos!</div>
+            
+            <form id="form-login">
+                <div class="input-group user-input">
+                    <input type="email" id="email-login" placeholder="E-mail" required>
+                    <i class="fas fa-envelope search-icon"></i>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="senha-login" placeholder="Senha" required minlength="6">
+                </div>
+                <a class="forgot-password" id="btn-abrir-recuperar">esqueceu sua senha?</a>
+                <button type="submit" class="submit-btn" id="btn-entrar">Entrar</button>
+            </form>
+        </main>
+
+        <footer class="footer" id="rodape-login">
+            <p id="btn-abrir-registro">Criar uma nova conta.</p>
+        </footer>
+
+        <!-- TELA DE REGISTRO -->
+        <main class="login-section hidden" id="tela-registro">
+            <h2>Criar Conta</h2>
+            <div id="msg-registro-sucesso" class="msg-sucesso">Conta criada com sucesso!</div>
+            <div id="msg-registro-erro" class="msg-erro"></div>
+            
+            <form id="form-registro">
+                <div class="input-group user-input">
+                    <input type="email" id="novo-email" placeholder="Seu melhor E-mail" required>
+                    <i class="fas fa-envelope search-icon"></i>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="nova-senha" placeholder="Crie uma Senha (mín 6 letras)" required minlength="6">
+                </div>
+                <div style="height: 45px;"></div> 
+                <button type="submit" class="submit-btn" style="background-color: #28a745;" id="btn-registrar">Registrar</button>
+            </form>
+        </main>
+
+        <footer class="footer hidden" id="rodape-registro">
+            <p id="btn-voltar-login">Voltar para o Login.</p>
+        </footer>
+
+        <!-- TELA DE RECUPERAR SENHA -->
+        <main class="login-section hidden" id="tela-recuperar">
+            <h2>Recuperar Senha</h2>
+            <p style="color: #ccc; font-size: 14px; margin-bottom: 20px;">Enviaremos um link para redefinir sua senha.</p>
+            <div id="msg-recuperar-sucesso" class="msg-sucesso"></div>
+            <div id="msg-recuperar-erro" class="msg-erro"></div>
+            
+            <form id="form-recuperar">
+                <div class="input-group user-input">
+                    <input type="email" id="email-recuperar" placeholder="Seu E-mail" required>
+                    <i class="fas fa-envelope search-icon"></i>
+                </div>
+                <div style="height: 25px;"></div> 
+                <button type="submit" class="submit-btn" id="btn-enviar-recuperacao">Enviar Link</button>
+            </form>
+        </main>
+
+        <footer class="footer hidden" id="rodape-recuperar">
+            <p id="btn-voltar-login-recuperar">Voltar para o Login.</p>
+        </footer>
+
+        <!-- ======================================================== -->
+        <!-- NOVA TELA DE SUCESSO (Com Botão de Acesso Atualizado) -->
+        <!-- ======================================================== -->
+        <main class="login-section hidden" id="tela-sucesso">
+            <h2 style="color: #4CAF50;">Login Aprovado!</h2>
+            <p style="color: white; margin-bottom: 10px;" id="texto-boas-vindas"></p>
+            <p style="color: #ccc; font-size: 14px; margin-bottom: 30px;">Clique no botão abaixo para entrar no sistema.</p>
+            
+            <!-- Link atualizado para o site correto -->
+            <a href="https://sites.google.com/view/telahub-agricultor-online/in%C3%ADcio" target="_blank" style="text-decoration: none;">
+                <button type="button" class="submit-btn" style="background-color: #28a745;">Acessar Plataforma</button>
+            </a>
+            
+            <div style="margin-top: 30px;">
+                <p id="btn-sair" style="color: #ff6b6b; font-size: 14px; cursor: pointer; text-decoration: underline;">Sair da Conta</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- SCRIPT DO FIREBASE -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-analytics.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, signOut } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC4giUyHYEcUleb5kVu4wFZ3QuL5EKC-Rc",
+            authDomain: "base-de-dados-login-e-registro.firebaseapp.com",
+            projectId: "base-de-dados-login-e-registro",
+            storageBucket: "base-de-dados-login-e-registro.firebasestorage.app",
+            messagingSenderId: "1019649010964",
+            appId: "1:1019649010964:web:efc0249ef27ebb80cb2601",
+            measurementId: "G-PP0KDR5ZNN"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+
+        // Mapeando Elementos das Telas
+        const telaLogin = document.getElementById('tela-login');
+        const rodapeLogin = document.getElementById('rodape-login');
+        const telaRegistro = document.getElementById('tela-registro');
+        const rodapeRegistro = document.getElementById('rodape-registro');
+        const telaRecuperar = document.getElementById('tela-recuperar');
+        const rodapeRecuperar = document.getElementById('rodape-recuperar');
+        const telaSucesso = document.getElementById('tela-sucesso');
+
+        function voltarParaLogin() {
+            telaRegistro.classList.add('hidden'); rodapeRegistro.classList.add('hidden');
+            telaRecuperar.classList.add('hidden'); rodapeRecuperar.classList.add('hidden');
+            telaSucesso.classList.add('hidden');
+            telaLogin.classList.remove('hidden'); rodapeLogin.classList.remove('hidden');
+            document.getElementById('msg-login-erro').style.display = 'none';
+        }
+
+        // --- NAVEGAÇÃO ENTRE TELAS ---
+        document.getElementById('btn-abrir-registro').addEventListener('click', () => {
+            telaLogin.classList.add('hidden'); rodapeLogin.classList.add('hidden');
+            telaRegistro.classList.remove('hidden'); rodapeRegistro.classList.remove('hidden');
+            document.getElementById('msg-registro-sucesso').style.display = 'none';
+            document.getElementById('msg-registro-erro').style.display = 'none';
+        });
+
+        document.getElementById('btn-abrir-recuperar').addEventListener('click', () => {
+            telaLogin.classList.add('hidden'); rodapeLogin.classList.add('hidden');
+            telaRecuperar.classList.remove('hidden'); rodapeRecuperar.classList.remove('hidden');
+            document.getElementById('msg-recuperar-sucesso').style.display = 'none';
+            document.getElementById('msg-recuperar-erro').style.display = 'none';
+        });
+
+        document.getElementById('btn-voltar-login').addEventListener('click', voltarParaLogin);
+        document.getElementById('btn-voltar-login-recuperar').addEventListener('click', voltarParaLogin);
+
+        // RECUPERAÇÃO DE SENHA
+        document.getElementById('form-recuperar').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email-recuperar').value;
+            const btn = document.getElementById('btn-enviar-recuperacao');
+            const msgErro = document.getElementById('msg-recuperar-erro');
+            const msgSucesso = document.getElementById('msg-recuperar-sucesso');
+
+            btn.innerText = "Enviando...";
+            msgErro.style.display = 'none'; msgSucesso.style.display = 'none';
+
+            sendPasswordResetEmail(auth, email)
+                .then(() => {
+                    btn.innerText = "Enviar Link";
+                    msgSucesso.innerText = "E-mail enviado! Verifique sua caixa de entrada.";
+                    msgSucesso.style.display = 'block';
+                    document.getElementById('email-recuperar').value = "";
+                })
+                .catch((error) => {
+                    btn.innerText = "Enviar Link";
+                    msgErro.style.display = 'block';
+                    if(error.code === 'auth/user-not-found' || error.code === 'auth/invalid-email') {
+                        msgErro.innerText = "Nenhuma conta encontrada com este e-mail.";
+                    } else {
+                        msgErro.innerText = "Erro ao enviar e-mail. Tente novamente.";
+                    }
+                });
+        });
+
+        // REGISTRO
+        document.getElementById('form-registro').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('novo-email').value;
+            const senha = document.getElementById('nova-senha').value;
+            const btn = document.getElementById('btn-registrar');
+            const msgErro = document.getElementById('msg-registro-erro');
+            const msgSucesso = document.getElementById('msg-registro-sucesso');
+
+            btn.innerText = "Registrando...";
+            msgErro.style.display = 'none';
+
+            createUserWithEmailAndPassword(auth, email, senha)
+                .then((userCredential) => {
+                    msgSucesso.style.display = 'block';
+                    btn.innerText = "Registrar";
+                    document.getElementById('novo-email').value = "";
+                    document.getElementById('nova-senha').value = "";
+                    setTimeout(voltarParaLogin, 2000);
+                })
+                .catch((error) => {
+                    btn.innerText = "Registrar";
+                    msgErro.style.display = 'block';
+                    if(error.code === 'auth/email-already-in-use') {
+                        msgErro.innerText = "Este e-mail já tem uma conta!";
+                    } else {
+                        msgErro.innerText = "Erro ao criar conta. Tente novamente.";
+                    }
+                });
+        });
+
+        // ==========================================
+        // LOGIN (AGORA MOSTRA A TELA DE SUCESSO)
+        // ==========================================
+        document.getElementById('form-login').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email-login').value;
+            const senha = document.getElementById('senha-login').value;
+            const btn = document.getElementById('btn-entrar');
+            const msgErro = document.getElementById('msg-login-erro');
+
+            btn.innerText = "Verificando...";
+            msgErro.style.display = 'none';
+
+            signInWithEmailAndPassword(auth, email, senha)
+                .then((userCredential) => {
+                    btn.innerText = "Entrar";
+                    
+                    // Esconde a tela de login
+                    telaLogin.classList.add('hidden'); 
+                    rodapeLogin.classList.add('hidden');
+                    
+                    // Mostra a tela de sucesso com o botão
+                    telaSucesso.classList.remove('hidden');
+                    document.getElementById('texto-boas-vindas').innerText = "Bem-vindo(a), " + email + "!";
+                    
+                    document.getElementById('email-login').value = "";
+                    document.getElementById('senha-login').value = "";
+                })
+                .catch((error) => {
+                    btn.innerText = "Entrar";
+                    msgErro.style.display = 'block';
+                    msgErro.innerText = "E-mail ou senha incorretos!";
+                });
+        });
+
+        // LOGOUT
+        document.getElementById('btn-sair').addEventListener('click', () => {
+            signOut(auth).then(() => {
+                voltarParaLogin();
+            });
+        });
+    </script>
+</body>
+</html>
