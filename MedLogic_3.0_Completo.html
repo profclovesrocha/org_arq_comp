@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedLogic 3.0</title>
+<style>
+:root{
+--gold:#FFD700;--bg:#121212;--card:#1e1e1e;--text:#fff;--ok:#2e7d32;--bad:#c62828;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:linear-gradient(135deg,#121212,#202020);color:var(--text)}
+header{padding:20px;text-align:center;background:#1a1a1a;border-bottom:3px solid var(--gold)}
+header h1{margin:0;color:var(--gold)}
+nav{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:15px}
+nav button,.btn{background:var(--gold);border:none;padding:10px 15px;border-radius:8px;font-weight:bold;cursor:pointer}
+.tab{display:none;padding:20px;max-width:1200px;margin:auto}
+.active{display:block}
+.card{background:var(--card);padding:18px;border-radius:12px;margin-bottom:15px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+input,select{width:100%;padding:10px;background:#2b2b2b;color:#fff;border:1px solid #444;border-radius:8px}
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid #333;padding:10px;text-align:center}
+th{color:var(--gold)}
+.kpi{font-size:28px;font-weight:bold;color:var(--gold)}
+.ok{color:#4caf50;font-weight:bold}
+.bad{color:#f44336;font-weight:bold}
+.flow{font-size:20px;text-align:center;padding:20px}
+</style>
+</head>
+<body>
+<header>
+<h1>🏥 MedLogic 3.0</h1>
+<p>Sistema de Atendimento + Demonstração de Lógica de Programação</p>
+</header>
+
+<nav>
+<button onclick="tab('atendimento')">🏥 Atendimento</button>
+<button onclick="tab('dashboard')">📊 Dashboard</button>
+<button onclick="tab('logica')">🧠 Lógica</button>
+<button onclick="tab('fluxo')">🔄 Fluxograma</button>
+</nav>
+
+<section id="atendimento" class="tab active">
+<div class="card">
+<div class="grid">
+<div><label>Nome</label><input id="nome"></div>
+<div><label>CPF</label><input id="cpf"></div>
+<div><label>Idade</label><input type="number" id="idade"></div>
+<div><label>Horário da Consulta</label><input type="time" id="hora"></div>
+<div><label>Cadastro Ativo</label><select id="cadastro"><option value="sim">Sim</option><option value="nao">Não</option></select></div>
+<div><label>Horário Agendado</label><select id="agenda"><option value="sim">Sim</option><option value="nao">Não</option></select></div>
+<div><label>Prioridade</label><select id="prioridade"><option>Normal</option><option>Retorno</option><option>Emergência</option></select></div>
+</div>
+<br>
+<button class="btn" onclick="processar()">Processar Atendimento</button>
+<button class="btn" onclick="limpar()">Limpar Banco</button>
+</div>
+
+<div class="card">
+<h3>Pacientes</h3>
+<table>
+<thead><tr><th>Nome</th><th>CPF</th><th>Idade</th><th>Consulta</th><th>Prioridade</th><th>Status</th></tr></thead>
+<tbody id="tb"></tbody>
+</table>
+</div>
+</section>
+
+<section id="dashboard" class="tab">
+<div class="grid">
+<div class="card"><div class="kpi">20</div>Total de Vagas</div>
+<div class="card"><div class="kpi" id="ocupadas">0</div>Ocupadas</div>
+<div class="card"><div class="kpi" id="restantes">20</div>Disponíveis</div>
+<div class="card"><div class="kpi" id="atendidos">0</div>Atendidos</div>
+<div class="card"><div class="kpi" id="barrados">0</div>Barrados</div>
+<div class="card"><div class="kpi" id="taxa">0%</div>Aprovação</div>
+</div>
+</section>
+
+<section id="logica" class="tab">
+<div class="card">
+<h2>Tabela Verdade (AND)</h2>
+<table>
+<tr><th>Cadastro</th><th>Agenda</th><th>Resultado</th></tr>
+<tr><td>Sim</td><td>Sim</td><td>Atendido</td></tr>
+<tr><td>Sim</td><td>Não</td><td>Barrado</td></tr>
+<tr><td>Não</td><td>Sim</td><td>Barrado</td></tr>
+<tr><td>Não</td><td>Não</td><td>Barrado</td></tr>
+</table>
+</div>
+</section>
+
+<section id="fluxo" class="tab">
+<div class="card flow" id="fluxoTxt">
+Paciente ➜ Cadastro? ➜ Agenda? ➜ Resultado
+</div>
+</section>
+
+<script>
+const TOTAL=20;
+
+function tab(id){
+document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+}
+
+function db(){ return JSON.parse(localStorage.getItem('medlogic3')||'[]'); }
+function salvar(lista){ localStorage.setItem('medlogic3',JSON.stringify(lista)); render(); }
+
+function processar(){
+const p={
+nome:nome.value||'Paciente',
+cpf:cpf.value,
+idade:idade.value,
+hora:hora.value||'--:--',
+cadastro:cadastro.value,
+agenda:agenda.value,
+prioridade:prioridade.value
+};
+const lista=db();
+lista.push(p);
+salvar(lista);
+}
+
+function limpar(){
+localStorage.removeItem('medlogic3');
+render();
+}
+
+function render(){
+const lista=db();
+tb.innerHTML='';
+
+let atend=0,barr=0;
+
+lista.forEach(p=>{
+const status=(p.cadastro==='sim' && p.agenda==='sim')?'Atendido':'Barrado';
+if(status==='Atendido') atend++; else barr++;
+
+tb.innerHTML+=`
+<tr>
+<td>${p.nome}</td>
+<td>${p.cpf}</td>
+<td>${p.idade}</td>
+<td>${p.hora}</td>
+<td>${p.prioridade}</td>
+<td class="${status==='Atendido'?'ok':'bad'}">${status}</td>
+</tr>`;
+});
+
+ocupadas.innerText=atend;
+restantes.innerText=TOTAL-atend;
+atendidos.innerText=atend;
+barrados.innerText=barr;
+
+const total=atend+barr;
+taxa.innerText= total ? Math.round((atend/total)*100)+'%' : '0%';
+
+if(lista.length){
+const u=lista[lista.length-1];
+fluxoTxt.innerText=`${u.nome} ➜ Cadastro(${u.cadastro}) ➜ Agenda(${u.agenda}) ➜ ${(u.cadastro==='sim'&&u.agenda==='sim')?'Atendido':'Barrado'}`;
+}
+}
+render();
+</script>
+</body>
+</html>
